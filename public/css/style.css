@@ -3,7 +3,8 @@
 :root {
     --font-family:  'Open Sans', sans-serif;
     --primary:#8E272A;
-    --dark:#2A2A2C ;
+    --primary-dark: #590d22;
+    --dark:#2A2A2C;
     --danger: #e74c3c;
     --background-light:#ecf0f1 ;
     --text-color: #444;
@@ -35,6 +36,12 @@ h1 {
 ul {
     padding: 0;
     list-style-type: none;
+}
+
+a{
+    text-decoration: none;
+    color: var(--text-color-light);
+
 }
 
 /* Container */
@@ -92,6 +99,29 @@ header {
     background-color: var(--primary);
     padding: 1.5rem;
     box-shadow: var(--box-shadow);
+    color:var(--text-color-light);
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-menu {
+    margin: 0;
+}
+
+.header-menu li {
+    border-radius: 3px;
+    padding: 5px 15px;
+    transition: background-color 0.2s;
+}
+
+.header-menu li:hover {
+    background-color: var(--primary-dark);
+}
+
+.active {
+    background-color: var(--primary-dark);
 }
 
 .logo {
@@ -99,6 +129,7 @@ header {
     font-size: 2rem;
     color: var(--text-color-light);
 }
+
 
 /* footer */ 
 
