@@ -2,11 +2,30 @@
 $fileName = __DIR__ . '/data/articles.json';
 
 $articles = [];
+$categories = [];
 
 if (file_exists($fileName)) {
     $articles = json_decode(file_get_contents($fileName), true) ?? [];
-}
+    $cattMp = array_map(fn($a) => $a['category'], $articles);
+    $categories = array_reduce($cattMp, function ($acc, $cat) {
+        if (isset($acc[$cat])) {
+            $acc[$cat]++;
+        }else {
+            $acc[$cat] = 1;
+        }
+        return $acc;
+    }, []);
 
+    $articlesPerCatagory = array_reduce($articles, function ($acc, $articles) {
+        if(isset($acc[$articles['category']])) {
+            $acc[$articles['category']] = [...$acc[$articles['category']], $articles];
+        } else {
+            $acc[$articles['category']] = $articles;
+        }
+        return $acc;
+    }, []);
+
+}
 ?>
 
 <!DOCTYPE html>
