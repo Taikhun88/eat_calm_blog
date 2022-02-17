@@ -41,7 +41,6 @@ ul {
 a{
     text-decoration: none;
     color: var(--text-color-light);
-
 }
 
 /* Container */
@@ -97,6 +96,11 @@ btn-small {
 
 .low-opacity {
     opacity: 0.5;
+}
+
+.small {
+    font-size: 1.2rem;
+    margin: 0 0.5rem;
 }
 
 header {

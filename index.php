@@ -4,6 +4,9 @@ $fileName = __DIR__ . '/data/articles.json';
 $articles = [];
 $categories = [];
 
+$_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$selectedCat = $_GET['cat'] ?? '';
+
 if (file_exists($fileName)) {
     $articles = json_decode(file_get_contents($fileName), true) ?? [];
     $cattMp = array_map(fn ($a) => $a['category'], $articles);
@@ -18,7 +21,7 @@ if (file_exists($fileName)) {
 
     $articlesPerCategories = array_reduce($articles, function ($acc, $article) {
         if (isset($acc[$article['category']])) {
-            $acc[$article['category']] = [...$acc[$article['category']], $article];
+            $acc[$article['category']][] = $article;
         } else {
             $acc[$article['category']] = [$article];
         }
@@ -32,7 +35,7 @@ if (file_exists($fileName)) {
 
 <head>
     <?php require_once 'includes/head.php' ?>
-    <link rel="stylesheet" href="public/css/index.css">
+    <link rel="stylesheet" href="/public/css/index.css">
     <title>Eat~CALM blog</title>
 </head>
 
@@ -40,25 +43,53 @@ if (file_exists($fileName)) {
     <div class="container">
         <?php require_once 'includes/header.php' ?>
         <div class="content">
-            <div class="category-container">
-                <?php foreach ($categories as $cat => $num) : ?>
-                    <h2><?= $cat ?></h2>
-                    <div class="articles-container">
+            <div class="postsfeed-container">
+                <div class="postsfeed-container">
+                    <ul class="category-container">
+                        <li class=<?= $selectedCat ? '' : 'cat-active' ?>>
+                            <a href="/">Tous les articles <span class="small">(<?= count($articles) ?>)</span></a>
+                        </li>
 
-                        <?php foreach ($articlesPerCategories[$cat] as $a) : ?>
-                            <div class="article block">
-                                <div class="overflow">
-                                    <div class="img-container" style="background-image:url(<?= $a['image'] ?>)">
+                        <?php foreach ($categories as $catName => $catNum) : ?>
+                            <li class=<?= $selectedCat ===  $catName ? 'cat-active' : '' ?>>
+                                <a href="/?cat=<?= $catName ?>"> <?= $catName ?><span class="small">(<?= $catNum ?>)</span> </a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+                <div class="postsfeed-content">
+                    <?php if (!$selectedCat) : ?>
+
+                        <?php foreach ($categories as $cat => $num) : ?>
+                            <h2><?= $cat ?></h2>
+                            <div class="articles-container">
+                                <?php foreach ($articlesPerCategories[$cat] as $a) : ?>
+                                    <div class="article block">
+                                        <div class="overflow">
+                                            <div class="img-container" style="background-image:url(<?= $a['image'] ?>)">
+                                            </div>
+                                        </div>
+                                        <h3><?= $a['title'] ?></h3>
                                     </div>
-                                </div>
-                                <h3><?= $a['title'] ?></h3>
+                                <?php endforeach; ?>
                             </div>
                         <?php endforeach; ?>
-                    </div>
-                <?php endforeach; ?>
-
+                    <?php else : ?>
+                        <h2><?= $selectedCat ?></h2>
+                        <div class="articles-container">
+                            <?php foreach ($articlesPerCategories[$selectedCat] as $a) : ?>
+                                <div class="article block">
+                                    <div class="overflow">
+                                        <div class="img-container" style="background-image:url(<?= $a['image'] ?>)">
+                                        </div>
+                                    </div>
+                                    <h3><?= $a['title'] ?></h3>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
             </div>
-
         </div>
         <?php require_once 'includes/footer.php' ?>
     </div>
