@@ -42,22 +42,17 @@
   flex: 200px;
 }
 
-.category-container li {
+.category-container a {
   margin: 1rem 0;
   transition: color 0.2s;
-}
-.category-container li:hover {
   color: var(--primary);
+}
+.category-container a:hover {
+  color: var(--primary-dark);
   cursor: pointer;
 }
 
-.category-container a {
-    color: var(--primary);
-}
-
-.cat-active {
+.cat-active a {
   color: var(--dark);
-  font-weight: 700;
-  text-decoration: underline;
-
+  font-weight: 900;
 }
