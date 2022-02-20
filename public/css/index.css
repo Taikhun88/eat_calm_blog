@@ -47,6 +47,7 @@
   transition: color 0.2s;
   color: var(--primary);
 }
+
 .category-container a:hover {
   color: var(--primary-dark);
   cursor: pointer;
