@@ -11,6 +11,7 @@
         'category' => '',
         'content' => ''
     ];
+    $category = '';
     if (file_exists($fileName)) {
         $articles = json_decode(file_get_contents($fileName), true) ?? [];
     }
@@ -59,7 +60,7 @@
             if (!$category) {
                 $errors['category'] = ERROR_REQUIRED;
               }
-              
+
             if (!$content) {
                 $errors['content'] = ERROR_REQUIRED;
             } elseif (mb_strlen($content) < 50) {
