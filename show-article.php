@@ -40,6 +40,9 @@ if (!$id) {
                 <h1 class="article-title"><?= $article['title'] ?></h1>
                 <div class="separator"></div>
                 <p class="article-content"><?= $article['content'] ?> </p>
+                <div class="action">
+                    <a class="btn btn-primary" href="/form-article.php?id=<?= $article['id'] ?>">Éditer un article</a>
+                </div>
             </div>
         </div>
         <?php require_once 'includes/footer.php' ?>
