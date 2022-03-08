@@ -6,10 +6,11 @@
     --primary-dark: #590d22;
     --dark:#2A2A2C;
     --danger: #e74c3c;
-    --background-light:#ecf0f1 ;
-    --text-color: #444;
+    --background-light:#e76f51;
+    --background-menu: #e9c56ac4;
+    --text-color: #264653;
     --text-color-light: #fff;
-    --box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    --box-shadow: rgba(17, 28, 36, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
     --border : 1px solid rgb(182, 182, 182);
 }
 
