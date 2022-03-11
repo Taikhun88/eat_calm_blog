@@ -1,6 +1,5 @@
 <?php
 
-
 $dns = 'mysql:host=localhost;dbname=blog';
 $user = 'root';
 $pwd = 'root';

@@ -1,15 +1,12 @@
 <?php
-$pdo = require_once './database.php';
-$statement = $pdo->prepare('SELECT * FROM article');
-$statement->execute();
-$articles = $statement->fetchAll();
+$articleDatabase = require_once __DIR__ . './database/models/ArticleDatabase.php';
 
+$articles = $articleDatabase->fetchAll();
+$categories = [];
 
 // Data for local version
 // $fileName = __DIR__ . '/data/articles.json';
 // $articles = [];
-
-$categories = [];
 
 $_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 $selectedCat = $_GET['cat'] ?? '';
