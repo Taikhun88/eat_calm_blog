@@ -1,21 +1,17 @@
 <?php
-$fileName = __DIR__ . '/data/articles.json';
 
-$articles = [];
+$pdo = require_once './database.php';
+$statement = $pdo->prepare('SELECT * FROM article WHERE id=:id');
+
 $_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 $id = $_GET['id'] ?? '';
 
 if (!$id) {
     header('Location: /');
 } else {
-    if (file_exists($fileName)) {
-        $articles = json_decode(file_get_contents($fileName), true) ?? [];
-        $articleIndex = array_search($id, array_column($articles, 'id'));
-        $article = $articles[$articleIndex];
-        // echo "<pre>";
-        // print_r($article);
-        // echo "</pre>";
-    }
+    $statement->bindValue(':id', $id);
+    $statement->execute();
+    $article = $statement->fetch();
 }
 
 ?>
@@ -35,12 +31,13 @@ if (!$id) {
         <div class="content">
             <div class="article-container">
                 <a class="article-back" href="/">Retour à la liste des articles</a>
-                <div class="article-cover-img" style="background-image:url(<?= $article['image']?>)">
+                <div class="article-cover-img" style="background-image:url(<?= $article['image'] ?>)">
                 </div>
                 <h1 class="article-title"><?= $article['title'] ?></h1>
                 <div class="separator"></div>
                 <p class="article-content"><?= $article['content'] ?> </p>
                 <div class="action">
+                    <a class="btn btn-secondary" href="/delete-article.php?id=<?= $article['id'] ?>">Supprimer l'article</a>
                     <a class="btn btn-primary" href="/form-article.php?id=<?= $article['id'] ?>">Éditer un article</a>
                 </div>
             </div>
