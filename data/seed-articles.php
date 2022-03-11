@@ -1,4 +1,5 @@
 <?php
+// get data and convert
 $articles = json_decode(file_get_contents('./articles.json'), true);
 
 $dns = 'mysql:host=localhost;dbname=blog';

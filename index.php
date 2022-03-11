@@ -1,14 +1,21 @@
 <?php
-$fileName = __DIR__ . '/data/articles.json';
+$pdo = require_once './database.php';
+$statement = $pdo->prepare('SELECT * FROM article');
+$statement->execute();
+$articles = $statement->fetchAll();
 
-$articles = [];
+
+// Data for local version
+// $fileName = __DIR__ . '/data/articles.json';
+// $articles = [];
+
 $categories = [];
 
 $_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 $selectedCat = $_GET['cat'] ?? '';
 
-if (file_exists($fileName)) {
-    $articles = json_decode(file_get_contents($fileName), true) ?? [];
+// We sent the data to the mysql server so we readapted the code here below
+if (count($articles)) {
     $cattMp = array_map(fn ($a) => $a['category'], $articles);
     $categories = array_reduce($cattMp, function ($acc, $cat) {
         if (isset($acc[$cat])) {
