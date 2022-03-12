@@ -20,6 +20,7 @@
 
 .article-container {
     padding-bottom: 10rem;
+    width: 100% ;
 }
 
 .article-back {
@@ -29,4 +30,11 @@
     cursor: pointer;
     margin-bottom: 1rem;
     display: block;
+}
+
+.action {
+    margin-top: 2rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
 }
