@@ -46,6 +46,7 @@
   margin: 1rem 0;
   transition: color 0.2s;
   color: var(--primary);
+  background-color: var(--background-menu);
 }
 
 .category-container a:hover {
