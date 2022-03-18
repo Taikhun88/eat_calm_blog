@@ -42,6 +42,7 @@ ul {
 .header-menu a{
     text-decoration: none;
     color: var(--text-color-light);
+
 }
 
 a {
@@ -122,12 +123,15 @@ header {
 
 .header-menu {
     margin: 0;
+    display: flex;
+    flex-flow: row;
 }
 
 .header-menu li {
     border-radius: 3px;
     padding: 5px 15px;
     transition: background-color 0.2s;
+    margin-left: 1rem;
 }
 
 .header-menu li:hover {
