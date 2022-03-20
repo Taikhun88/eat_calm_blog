@@ -1,5 +1,8 @@
 <?php
+require_once __DIR__ . '/database/database.php';
+require_once __DIR__ . '/database/security.php';
 
+$currentUser = isLoggedIn();
 $articleDatabase = require_once __DIR__ . './database/models/ArticleDatabase.php';
 
 $_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -33,10 +36,12 @@ if (!$id) {
                 <h1 class="article-title"><?= $article['title'] ?></h1>
                 <div class="separator"></div>
                 <p class="article-content"><?= $article['content'] ?> </p>
-                <div class="action">
-                    <a class="btn btn-secondary" href="/delete-article.php?id=<?= $article['id'] ?>">Supprimer l'article</a>
-                    <a class="btn btn-primary" href="/form-article.php?id=<?= $article['id'] ?>">Éditer un article</a>
-                </div>
+                    <?php if($currentUser && $currentUser['id'] === $article['author']): ?>
+                        <div class="action">
+                            <a class="btn btn-secondary" href="/delete-article.php?id=<?= $article['id'] ?>">Supprimer l'article</a>
+                            <a class="btn btn-primary" href="/form-article.php?id=<?= $article['id'] ?>">Éditer un article</a>
+                        </div>
+                    <?php endif; ?>
             </div>
         </div>
         <?php require_once 'includes/footer.php' ?>

@@ -1,23 +1,13 @@
 <?php
+$pdo = require_once __DIR__ . '/database/database.php';
 
-?>
+$sessionId = $_COOKIE['session'];
+if ($sessionId) {
+    $statement = $pdo->prepare('SELECT * FROM session WHERE id=:id');
+    $statement->bindValue(':id', $sessionId);
+    $statement->execute();
 
-<!DOCTYPE html>
-<html lang="fr">
+    setcookie('session', '', time() -1);
+    header('Location: /authentication-login.php');
+}
 
-<head>
-    <?php require_once 'includes/head.php' ?>
-    <title>Se déconnecter - Eat~CALM blog</title>
-</head>
-
-<body>
-    <div class="container">
-        <?php require_once 'includes/header.php' ?>
-        <div class="content">
-            <h1>Se déconnecter</h1>
-        </div>
-        <?php require_once 'includes/footer.php' ?>
-    </div>
-</body>
-
-</html>
