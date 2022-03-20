@@ -6,3 +6,17 @@
 .info-container ul li strong {
     margin-right: 5px;
 }
+
+.articles-list {
+    width: 100%;
+}
+
+.articles-list ul li {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 15px;
+    border-radius: 3px;
+    background-color: white;
+    border: var(--border);
+    margin-bottom: 5px;
+}

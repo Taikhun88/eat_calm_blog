@@ -49,6 +49,19 @@ $articles = $articleDatabase->fetchUserArticle($currentUser['id']);
                 </ul>
             </div>
             <h2>Mes articles</h2>
+            <div class="articles-list">
+                <ul>
+                    <?php foreach($articles as $a): ?>
+                    <li>
+                        <span> <?= $a['title'] ?> </span>
+                        <div class="articles-actions">
+                            <a href="/form-article.php?id=<?= $a['id'] ?>" class="btn btn-primary btn-small">Modifier</a>
+                            <a href="/delete-article.php?id=<?= $a['id'] ?>" class="btn btn-secondary btn-small">Supprimer</a>
+                        </div>
+                    </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
         </div>
         <?php require_once 'includes/footer.php' ?>
     </div>
