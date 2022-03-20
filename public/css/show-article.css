@@ -18,6 +18,13 @@
     white-space: pre-wrap;
 }
 
+.article-author {
+    text-align: right;
+    font-size: 1rem;
+    font-weight: 700;
+    font-style: italic;
+}
+
 .article-container {
     padding-bottom: 10rem;
     width: 100% ;

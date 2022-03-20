@@ -33,6 +33,19 @@
   transition: transform 1s;
 }
 
+.article-author {
+  display: flex;
+  flex-flow: row;
+  justify-content: flex-end;
+  padding-right: 2rem;
+}
+
+.article-author p {
+  font-size: 1rem;
+  font-weight: 700;
+  font-style: italic;
+}
+
 .postsfeed-container {
   display: flex;
   flex-flow: row nowrap;
