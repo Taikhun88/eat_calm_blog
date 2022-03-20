@@ -9,11 +9,11 @@ $currentUser = $currentUser ?? false;
             <li class=<?= $_SERVER['REQUEST_URI'] === '/form-article.php' ? 'active' : '' ?>>
                 <a href="/form-article.php">Écrire un article</a>
             </li>
-            <li class=<?= $_SERVER['REQUEST_URI'] === '/profile.php' ? 'active' : '' ?>>
-                <a href="/profile.php">Mon profil</a>
-            </li>
             <li class=<?= $_SERVER['REQUEST_URI'] === '/authentication-logout.php' ? 'active' : '' ?>>
                 <a href="/authentication-logout.php">Se déconnecter</a>
+            </li>
+            <li class="<?= $_SERVER['REQUEST_URI'] === '/profile.php' ? 'active' : '' ?> header-profile">
+                <a href="/profile.php"> <?= $currentUser['firstname'][0] . $currentUser['lastname'][0] ?> </a>
             </li>
 
         <?php else : ?>

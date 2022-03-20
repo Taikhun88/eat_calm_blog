@@ -6,7 +6,7 @@
     --primary-dark: #590d22;
     --dark:#2A2A2C;
     --danger: #e74c3c;
-    --background-light:#e76f51;
+    --background-light:#e76f511f;
     --background-menu: #e9c56ac4;
     --text-color: #264653;
     --text-color-light: #fff;
@@ -125,6 +125,7 @@ header {
     margin: 0;
     display: flex;
     flex-flow: row;
+    align-items: center;
 }
 
 .header-menu li {
@@ -148,6 +149,17 @@ header {
     color: var(--text-color-light);
 }
 
+li.header-profile {
+    font-weight: 700;
+    background-color: var(--primary-dark);
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: center;
+}
 
 /* footer */ 
 
