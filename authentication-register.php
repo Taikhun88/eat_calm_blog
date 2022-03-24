@@ -1,5 +1,6 @@
 <?php
 $pdo = require_once './database/database.php';
+$authenticationDB = require_once 'database/security.php';
 
 // List of different errors depending on type of input expected
 const ERROR_REQUIRED = 'Veuillez renseigner ce champ';
@@ -70,24 +71,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // checks if there is no errors if no errors then we proceed the SQL request to send input to database
     if (empty(array_filter($errors, fn($e) => $e !== ''))) {
-        $statement = $pdo->prepare('INSERT INTO user VALUES (
-            DEFAULT, 
-            :firstname, 
-            :lastname,
-            :email,
-            :password
-        )');
-
-        // Secure the password with hash in database
-        $hashedPassword = password_hash($password, PASSWORD_ARGON2I);
-
-        // attach input value to the variables sent to database
-        $statement->bindValue(':firstname', $firstname);
-        $statement->bindValue(':lastname', $lastname);
-        $statement->bindValue(':email', $email);
-        $statement->bindValue(':password', $hashedPassword);
-        $statement->execute();
-        
+        $authenticationDB->register([
+            'firstname' => $firstname,
+            'lastname' => $lastname,
+            'email' => $email, 
+            'password' => $password
+        ]);        
         // immediate redirection after request done
         header('Location: /');        
     }

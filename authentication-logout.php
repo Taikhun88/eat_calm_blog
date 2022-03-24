@@ -1,13 +1,10 @@
 <?php
-$pdo = require_once __DIR__ . '/database/database.php';
+require_once __DIR__ . '/database/database.php';
+$authenticationDb = require_once __DIR__ . '/database/security.php';
 
 $sessionId = $_COOKIE['session'];
 if ($sessionId) {
-    $statement = $pdo->prepare('SELECT * FROM session WHERE id=:id');
-    $statement->bindValue(':id', $sessionId);
-    $statement->execute();
-
-    setcookie('session', '', time() -1);
+    $authenticationDb->logout($sessionId);
     header('Location: /authentication-login.php');
 }
 
