@@ -24,7 +24,7 @@ class AuthenticationDataBase
         $this->statementReadUser = $pdo->prepare('SELECT * FROM user WHERE id=:id');
         $this->statementReadUserFromEmail = $pdo->prepare('SELECT * FROM user WHERE email=:email');
         $this->statementCreateSession = $pdo->prepare('INSERT INTO session VALUES (
-            DEFAULT, 
+            :sessionid, 
             :userid
         )');
 
@@ -33,10 +33,17 @@ class AuthenticationDataBase
 
     function login(string $userId): void
     {
+        // secure session
+        $sessionId = bin2hex(random_bytes(32));
         $this->statementCreateSession->bindValue(':userid', $userId);
+        $this->statementCreateSession->bindValue(':sessionid', $sessionId);
         $this->statementCreateSession->execute();
-        $sessionId = $this->pdo->lastInsertId();
+        // signature of the cookies with secret sentence
+        $signature = hash_hmac('sha256', $sessionId, 'des cookies tout frais tout propre');
+        // NO NEED LAST INSERT ID ANYMORE $sessionId = $this->pdo->lastInsertId();
         setcookie('session', $sessionId, time() + 60 * 60 * 24 * 14, '', '', false, true);
+        // add new cookie for this signature
+        setcookie('signature', $signature, time() + 60 * 60 * 24 * 14, '', '', false, true);
         return;
     }
 
@@ -51,21 +58,26 @@ class AuthenticationDataBase
         $this->statementRegister->bindValue(':email', $user['email']);
         $this->statementRegister->bindValue(':password', $hashedPassword);
         $this->statementRegister->execute();
+        return;
     }
 
     function isLoggedIn(): array | false
     {
         $sessionId = $_COOKIE['session'] ?? '';
-        if ($sessionId) {
-            $this->statementReadSession->bindValue(':id', $sessionId) ;
-            $this->statementReadSession->execute();
-
-            $session = $this->statementReadSession->fetch();
-
-            if ($session) {
-                $this->statementReadUser->bindValue(':id', $session['userid']);
-                $this->statementReadUser->execute();
-                $user = $this->statementReadUser->fetch();
+        $signature = $_COOKIE['signature'] ?? '';
+        if ($sessionId && $signature) {
+            $hash = hash_hmac('sha256', $sessionId, 'des cookies tout frais tout propre');
+            if (hash_equals($hash, $signature)) {
+                $this->statementReadSession->bindValue(':id', $sessionId);
+                $this->statementReadSession->execute();
+    
+                $session = $this->statementReadSession->fetch();
+    
+                if ($session) {
+                    $this->statementReadUser->bindValue(':id', $session['userid']);
+                    $this->statementReadUser->execute();
+                    $user = $this->statementReadUser->fetch();
+                }
             }
         }
         return $user ?? false;
@@ -77,6 +89,7 @@ class AuthenticationDataBase
         $this->statementDeleteSession->execute();
     
         setcookie('session', '', time() -1);
+        setcookie('signature', '', time() -1);
         return;
     }
 
@@ -88,8 +101,3 @@ class AuthenticationDataBase
     }
 }
 return new AuthenticationDataBase($pdo);
-
-// PHP procédural
-// function isLoggedIn() {
-
-// }
