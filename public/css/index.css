@@ -17,7 +17,7 @@
   transform: scale(1.1);
 }
 
-.newsfeed-content h2 {
+.postfeeds-content h2 {
   font-size: 1.9rem;
   padding: 0 1rem;
 }
@@ -49,6 +49,17 @@
 .postsfeed-container {
   display: flex;
   flex-flow: row nowrap;
+}
+
+@media only screen and (max-width: 800px) {
+  .newsfeed-container {
+    display: none;
+  }
+
+  .articles-container {
+    flex-flow: column;
+    align-items: unset;
+  }
 }
 
 .category-container {

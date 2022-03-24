@@ -53,7 +53,7 @@ if (count($articles)) {
     <div class="container">
         <?php require_once 'includes/header.php' ?>
         <div class="content">
-            <div class="postsfeed-container">
+
                 <div class="postsfeed-container">
                     <ul class="category-container">
                         <li class=<?= $selectedCat ? '' : 'cat-active' ?>>
