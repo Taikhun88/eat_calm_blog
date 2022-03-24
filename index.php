@@ -108,6 +108,7 @@ if (count($articles)) {
         </div>
         <?php require_once 'includes/footer.php' ?>
     </div>
+
 </body>
 
 </html>
