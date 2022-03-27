@@ -6,7 +6,7 @@
     --primary-dark: #590d22;
     --dark:#2A2A2C;
     --danger: #e74c3c;
-    --background-light:#e76f51;
+    --background-light:#e76f511f;
     --background-menu: #e9c56ac4;
     --text-color: #264653;
     --text-color-light: #fff;
@@ -46,7 +46,6 @@ ul {
 
 a {
     text-decoration: none;
-    color: var(--text-color);
 }
 
 /* Container */
@@ -122,12 +121,39 @@ header {
 
 .header-menu {
     margin: 0;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
 }
 
 .header-menu li {
     border-radius: 3px;
     padding: 5px 15px;
     transition: background-color 0.2s;
+    margin-left: 1rem;
+}
+
+
+.header-mobile-list {
+    display: none;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    color:var(--text-color);
+    background: var(--background-light);
+}
+
+.show {
+    display: block;
+}
+
+.header-mobile-list li {
+    padding: 1rem;
+}
+
+.header-mobile-list li.active {
+    color: var(--text-color-light);
+    font-weight: 700;
 }
 
 .header-menu li:hover {
@@ -144,6 +170,17 @@ header {
     color: var(--text-color-light);
 }
 
+li.header-profile {
+    font-weight: 700;
+    background-color: var(--primary-dark);
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: center;
+}
 
 /* footer */ 
 
@@ -167,8 +204,46 @@ footer {
     padding: 21rem 0;
 }
 
-/* block */
+/* form */
+.form-container {
+    display: flex;
+    flex-flow: column;
+    width: 60rem;
+}
 
+.form-container h1 {
+    margin-bottom: 2rem;
+}
+
+.form-control {
+    display: flex;
+    flex-flow: column;
+    margin: 1rem 0;
+}
+
+.form-control label {
+    margin-bottom: 1rem;
+}
+
+.form-control input {
+    border: var(--border);
+    border-radius: 3px;
+    padding: 1rem 1.5rem;
+}
+
+.form-control textarea {
+    border: var(--border);
+    padding: 1rem 1.5rem;
+    min-height: 20rem;
+}
+
+.form-actions {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+}
+
+/* block */
 .block {
     border-radius: 3px;
     border: var(--border);
@@ -177,11 +252,29 @@ footer {
 }
 
 /* utils */ 
-
 .p-20 {
     padding: 20px;
 }
 
 .p-10 {
     padding: 10px;
+}
+
+@media only screen and (max-width: 800px) {
+
+    .header-menu {
+        display: none;
+    }
+
+    .header-mobile {
+        display: block;
+    }
+
+    .form-container {
+        width: 100%;
+    }
+
+    .content {
+        padding: 1rem;
+    }
 }

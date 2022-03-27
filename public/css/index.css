@@ -17,7 +17,7 @@
   transform: scale(1.1);
 }
 
-.newsfeed-content h2 {
+.postfeeds-content h2 {
   font-size: 1.9rem;
   padding: 0 1rem;
 }
@@ -33,9 +33,33 @@
   transition: transform 1s;
 }
 
+.article-author {
+  display: flex;
+  flex-flow: row;
+  justify-content: flex-end;
+  padding-right: 2rem;
+}
+
+.article-author p {
+  font-size: 1rem;
+  font-weight: 700;
+  font-style: italic;
+}
+
 .postsfeed-container {
   display: flex;
   flex-flow: row nowrap;
+}
+
+@media only screen and (max-width: 800px) {
+  .newsfeed-container {
+    display: none;
+  }
+
+  .articles-container {
+    flex-flow: column;
+    align-items: unset;
+  }
 }
 
 .category-container {
