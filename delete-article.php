@@ -12,7 +12,7 @@ $_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 $id = $_GET['id'] ?? '';
 
 if ($id) {
-    $article = $articleDatabase->fetch($id);
+    $article = $articleDatabase->fetchUserArticle($id);
     if ($article['author'] === $currentUser['id']) {
         $articleDatabase->deleteOne($id);
     }
