@@ -1,4 +1,12 @@
 <?php
+require_once __DIR__ . '/database/database.php';
+$authenticationDB = require_once __DIR__ . '/database/security.php';
+
+$currentUser = $authenticationDB->isLoggedIn();
+
+if (!$currentUser) {
+    header('Location: /');
+}
 $articleDatabase = require_once __DIR__ . './database/models/ArticleDatabase.php';
 
 const ERROR_REQUIRED = 'Veuillez renseigner ce champ';
@@ -19,6 +27,9 @@ $id = $_GET['id'] ?? '';
 if ($id) {
 
     $article = $articleDatabase->fetchOne($id);
+    if ($article['author'] !== $currentUser['id']) {
+        header('Location: /');
+    }
     $title = $article['title'];
     $image = $article['image'];
     $category = $article['category'];
@@ -72,13 +83,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $article['image'] = $image;
             $article['category'] = $category;
             $article['content'] = $content;
+            $article['author'] = $currentUser['id'];
             $articleDatabase->updateOne($article);
         } else {
             $articleDatabase->createOne([
                 'title' => $title,
                 'image' => $image,
                 'category' => $category,
-                'content' => $content
+                'content' => $content,
+                'author' => $currentUser['id']
             ]);
         }
         header('Location: /');
@@ -92,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <head>
     <?php require_once 'includes/head.php' ?>
-    <link rel="stylesheet" href="public/css/form-article.css">
+    <!-- <link rel="stylesheet" href="public/css/form-article.css"> -->
     <title><?= $id ? 'Modifier' : 'Créer' ?> un article- Eat~CALM blog</title>
 </head>
 
