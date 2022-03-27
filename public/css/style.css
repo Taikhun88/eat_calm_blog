@@ -132,9 +132,7 @@ header {
     transition: background-color 0.2s;
     margin-left: 1rem;
 }
-.header-mobile {
-    display: none;
-}
+
 
 .header-mobile-list {
     display: none;
@@ -156,16 +154,6 @@ header {
 .header-mobile-list li.active {
     color: var(--text-color-light);
     font-weight: 700;
-}
-
-@media only screen and (max-width: 800px) {
-    .header-menu {
-        display: none;
-    }
-
-    .header-mobile {
-        display: block;
-    }
 }
 
 .header-menu li:hover {
