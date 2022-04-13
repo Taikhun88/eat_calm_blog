@@ -1,6 +1,6 @@
 <?php
-require_once './database/database.php';
-$authenticationDB = require_once './database/security.php';
+require_once __DIR__ . '/database/database.php';
+$authenticationDB = require_once __DIR__ . '/database/security.php';
 
 const ERROR_REQUIRED = 'Veuillez renseigner ce champ';
 const ERROR_PASSWORD_TOO_SHORT = 'Le mot de passe choisi doit être composé de minimum 6 caractères';

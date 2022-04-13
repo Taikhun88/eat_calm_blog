@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/database/database.php';
-require_once __DIR__ . '/database/security.php';
+$authenticationDB = require_once __DIR__ . '/database/security.php';
 
 if (!$currentUser) {
     header('Location: /');

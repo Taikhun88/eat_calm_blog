@@ -1,6 +1,6 @@
 <?php
-$pdo = require_once './database/database.php';
-$authenticationDB = require_once 'database/security.php';
+require_once __DIR__ . '/database/database.php';
+$authenticationDB = require_once __DIR__ . '/database/security.php';
 
 // List of different errors depending on type of input expected
 const ERROR_REQUIRED = 'Veuillez renseigner ce champ';
