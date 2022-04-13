@@ -14,7 +14,7 @@ $categories = [];
 // $fileName = __DIR__ . '/data/articles.json';
 // $articles = [];
 
-$_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_SPECIAL_CHARS);
 $selectedCat = $_GET['cat'] ?? '';
 
 // We sent the data to the mysql server so we readapted the code here below
