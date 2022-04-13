@@ -21,9 +21,9 @@ $currentUser = $currentUser ?? false;
             </li>
 
         <?php else : ?>
-            <li class=<?= $_SERVER['REQUEST_URI'] === '/authentication-register.php' ? 'active' : '' ?>>
+            <!-- <li class=<?= $_SERVER['REQUEST_URI'] === '/authentication-register.php' ? 'active' : '' ?>>
                 <a href="/authentication-register.php">S'inscrire</a>
-            </li>
+            </li> -->
             <li class=<?= $_SERVER['REQUEST_URI'] === '/authentication-login.php' ? 'active' : '' ?>>
                 <a href="/authentication-login.php">Se connecter</a>
             </li>
