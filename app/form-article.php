@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/database/database.php';
+require __DIR__ . '/database/database.php';
 $authenticationDB = require_once __DIR__ . '/database/security.php';
 
 $currentUser = $authenticationDB->isLoggedIn();
@@ -7,7 +7,7 @@ $currentUser = $authenticationDB->isLoggedIn();
 if (!$currentUser) {
     header('Location: /');
 }
-$articleDatabase = require_once __DIR__ . './database/models/ArticleDatabase.php';
+$articleDatabase = require_once __DIR__ . '/database/models/ArticleDatabase.php';
 
 const ERROR_REQUIRED = 'Veuillez renseigner ce champ';
 const ERROR_TITLE_TOO_SHORT = 'Le titre est trop court';
@@ -22,7 +22,7 @@ $errors = [
 ];
 $category = '';
 
-$_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_SPECIAL_CHARS);
 $id = $_GET['id'] ?? '';
 if ($id) {
 
