@@ -1,9 +1,9 @@
 <?php
-require __DIR__ . '/database/database.php';
+require_once __DIR__ . '/database/database.php';
 $authenticationDB = require_once __DIR__ . '/database/security.php';
 
 $currentUser = $authenticationDB->isLoggedIn();
-$articleDatabase = require_once __DIR__ . './database/models/ArticleDatabase.php';
+$articleDatabase = require_once __DIR__ . '/database/models/ArticleDatabase.php';
 
 $articles = $articleDatabase->fetchAll();
 // var_dump($articles);
