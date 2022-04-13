@@ -2,7 +2,7 @@
 
 $dns = 'mysql:host=localhost;dbname=blog';
 $user = 'root';
-$pwd = 'root';
+$pwd = '@0yGzs6C9_';
 
 try {
     $pdo = new PDO($dns, $user, $pwd, [
