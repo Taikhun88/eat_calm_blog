@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/database/database.php';
+require __DIR__ . '/database/database.php';
 $authenticationDB = require_once __DIR__ . '/database/security.php';
 
 $currentUser = $authenticationDB->isLoggedIn();
