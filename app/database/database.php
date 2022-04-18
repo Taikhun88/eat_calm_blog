@@ -3,7 +3,7 @@
 // $dns = 'mysql:host=localhost;dbname=blog';
 // $user = 'root';
 // $pwd = 'root';
-$configData = parse_ini_file('database\models\config.ini');
+$configData = parse_ini_file(__DIR__ . '\database\models\config.ini');
 // var_dump($configData);
 
 try {
