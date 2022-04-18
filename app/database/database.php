@@ -1,13 +1,11 @@
 <?php
 
-// $dns = 'mysql:host=localhost;dbname=blog';
-// $user = 'root';
-// $pwd = 'root';
-$configData = parse_ini_file('./config.ini');
-// var_dump($configData);
+$dns = 'mysql:host=localhost;dbname=blog';
+$user = 'root';
+$pwd = 'root';
 
 try {
-    $pdo = new PDO($configData['DATABASE_DNS'], $configData['DATABASE_USERNAME'], $configData['DATABASE_PASSWORD'], [
+    $pdo = new PDO($dns, $user, $pwd, [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
     ]);
