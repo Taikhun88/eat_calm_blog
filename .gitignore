@@ -1,8 +1,1 @@
-## vendor library
-vendor
-
-## env variables
-.env
-
-## private key
-_.eat-calm-blog.fr_private_key.key
+app/config.ini
